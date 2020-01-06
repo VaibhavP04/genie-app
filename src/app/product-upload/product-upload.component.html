@@ -1,0 +1,128 @@
+<nav class="navbar product-navbar" id="main">
+    <button class="toggle-button text-left" id="openBtn" (click)="openNav()" href="javascript:void(0)">☰</button>
+    <div class="nav-item dropdown">
+    <a class="text-right user-profile nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Howdy, Walltech</a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="row">
+            <div class="col-2">
+                <img src="assets/images/user.png">
+            </div>
+            <div class="col-10">
+                    <a class="dropdown-item" href="javascript:void(0);">Walltech</a>
+                    <a class="dropdown-item" [routerLink]="['/admin-profile']" routerDirection="forward">Edit my profile</a>
+                    <a class="dropdown-item" href="javascript:void(0);" (click)="logout()">Logout</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</nav>
+
+<div id="mySidebar" class="sidebar">
+    <button type="button" class="closebtn" (click)="closeNav()">☰</button>
+    <a href="javascript:void(0);" class="dropdown-btn">Products</a>
+    <div class="dropdown-container">
+        <a  href="javascript:void(0);">Resturants</a>
+        <a href="javascript:void(0);">Groceries</a>
+        <a href="javascript:void(0);">Packages</a>
+        <a href="javascript:void(0);">BookStalls</a>
+      </div>
+    <a href="javascript:void(0);">Vendor's</a>
+    <a href="javascript:void(0);">Delivery Boy</a>
+    <a href="javascript:void(0);">Reports</a>
+    <a href="javascript:void(0);">Settings</a>
+</div>
+<form [formGroup]="addProductForm" (ngSubmit)="uploadVendorProducts()">
+<div id="page-content" class="page-content">
+    <div class="row">
+        <div class="col-6 text-left">
+            <h4>Add new product</h4>
+        </div>
+        <div class="col-6 text-right">
+            <ul class="product-right">
+                <li><a href="javascript:void(0);">Move to Trash</a></li>
+                <li><button type="submit">Publish</button></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="product-page-inner">
+                <h4>Product name</h4>
+                <div class="form-group">
+                    <input formControlName="productName" type="text" placeholder="Product name">
+                </div>
+            </div>
+            <div class="product-page-inner">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row pricing-wrap">
+                            <div class="col-5"><label>Regular price()</label></div>
+                            <div class="col-7">
+                                <input formControlName="regularPrice" type="text" placeholder="Regular Price">
+                            </div>
+                        </div>
+                        <div class="row pricing-wrap">
+                            <div class="col-5"><label>SKU</label></div>
+                            <div class="col-7">
+                                <input formControlName="sku" type="text" placeholder="SKU">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row pricing-wrap">
+                            <div class="col-5"><label>Sale price()</label></div>
+                            <div class="col-7">
+                                <input formControlName="salePrice" type="text" placeholder="Sale price">
+                            </div>
+                        </div>
+                        <div class="row pricing-wrap">
+                            <div class="col-5"><label>Stock status</label></div>
+                            <div class="col-7">
+                                <input formControlName="stockStatus" type="text" placeholder="Stock status">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-page-inner">
+                <h4>Product short description</h4>
+                <textarea formControlName="productDescription" rows="5" col="5" placeholder="Product short description"></textarea>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-header" style=background-color:#fff>Product Image</div>
+                <div class="card-body">
+                    <label class="btn btn-default" style=text-align:left!important;color:blue>
+                        <img src="assets/images/attachmenticon.png" style=width:10%> Set product image <input
+                            type="file" hidden>
+                    </label>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" style=background-color:#fff>Product categories</div>
+                <div class="card-body">
+
+                    <div class="custom-control custom-checkbox" style=padding-left:0px>
+                        <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
+                        <ul>
+                            <li *ngFor="let categories of productCategoryList | keyvalue">
+                                <input formControlName="categories" type="checkbox" [(ngModel)]="categories.checked" (change)="selectCategory(categories.value, $event)">
+                                <label>{{categories.value.CategoryName}}</label>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" style=background-color:#fff>Product type</div>
+                <div class="card-body">
+                    <div class="checkbox">
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
